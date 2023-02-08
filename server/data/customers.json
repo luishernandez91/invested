@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "Joseph",
+    "lastname": "Moroni",
+    "phone":"01242223",
+    "email": "jmoroni@mail.com"
+  },
+  {
+    "id": 2,
+    "name": "Carl",
+    "lastname": "Smith",
+    "phone":"34678932",
+    "email": "cSmith@mail.com"
+  },
+  {
+    "id": 3,
+    "name": "Donna",
+    "lastname": "Miller",
+    "phone":"54762198",
+    "email": "dMiller@mail.com"
+  },
+  {
+    "id": 4,
+    "name": "Claire",
+    "lastname": "Davis",
+    "phone":"65873209",
+    "email": "cDavis@mail.com"
+  }
+]

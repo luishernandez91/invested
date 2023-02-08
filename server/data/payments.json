@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "credit_id": 1,
+    "amount": 12500,
+    "date": "01-01-2023"
+  },
+  {
+    "id": 2,
+    "credit_id": 1,
+    "amount": 12500,
+    "date": "01-07-2023"
+  },
+  {
+    "id": 3,
+    "credit_id": 1,
+    "amount": 12500,
+    "date": "01-12-2023"
+  },
+  {
+    "id": 4,
+    "credit_id": 1,
+    "amount": 12500,
+    "date": "01-30-2023"
+  },
+  {
+    "id": 5,
+    "credit_id": 2,
+    "amount": 6250,
+    "date": "12-01-2022"
+  },
+  {
+    "id": 6,
+    "credit_id": 4,
+    "amount": 6250,
+    "date": "01-14-2023"
+  },
+  {
+    "id": 7,
+    "credit_id": 5,
+    "amount": 2500,
+    "date": "01-23-2023"
+  },
+  {
+    "id": 8,
+    "credit_id": 6,
+    "amount": 8125,
+    "date": "01-30-2023"
+  }
+]
