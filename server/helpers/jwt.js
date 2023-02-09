@@ -16,5 +16,22 @@ const getToken = (id) => {
   });
 
 }
+const validateToken = (req, res, next) => {
+  const token = req.header('token');
 
-module.exports = {getToken}
+  if (!token) {
+    return res.status(401).json({
+      message: 'No token found'
+    });
+  }
+
+  try {
+    const {id} = jwt.verify(token, process.env.SEED);
+    req.id = id;
+    next();
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+module.exports = {getToken, validateToken}
