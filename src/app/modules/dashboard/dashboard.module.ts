@@ -3,6 +3,9 @@ import {CommonModule} from '@angular/common';
 import {DashboardComponent} from './dashboard.component';
 import {RouterModule, Routes} from "@angular/router";
 import {ComponentsModule} from "@shared/components/components.module";
+import {CustomerFormComponent} from './customer-form/customer-form.component';
+import {MaterialModule} from "@shared/modules/material/material.module";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 const routes: Routes = [
@@ -29,12 +32,15 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    CustomerFormComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     ComponentsModule,
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class DashboardModule {

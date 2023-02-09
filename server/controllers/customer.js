@@ -1,5 +1,6 @@
 const {response} = require('express');
 const Customer = require('../models/customer');
+const Credit = require('../models/credit');
 const getCustomers = async (req, res) => {
   const customers = await Customer.find({}, 'name lastname phone email');
   res.json(customers);
@@ -9,6 +10,14 @@ const postCustomer = async (req, res) => {
   try {
     const customer = new Customer(req.body);
     await customer.save();
+
+    const credit = new Credit({
+      customer_id: customer.id,
+      amount: req?.body.amount
+    });
+
+    await credit.save();
+
     res.json({created: true, customer});
   } catch (e) {
     res.status(500).json({

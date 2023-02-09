@@ -27,6 +27,7 @@
       "@shared/*": ["src/app/shared/*"],
       "@modules/*": ["src/app/modules/*"],
       "@services/*": ["src/app/services/*"],
+      "@state/*": ["src/state/*"],
       "@env/*": ["src/environments/*"],
     }
   },

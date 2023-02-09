@@ -1,27 +1,41 @@
-# InvestedChallenge
+<br />
+<div align="center">
+<img src="https://invested.mx/wp-content/uploads/2022/02/logoinvestedhd.svg" alt="Logo" width="200" height="80">
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.4.
+<p>Challenge</p>
 
-## Development server
+<h3 align="center">Credit management</h3>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+  <p align="center">
+    dashboard with login system
+    <br />
+  </p>
+</div>
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Built With
 
-## Build
+I chose the following libraries/frameworks to build both frontend and backed
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+* [Angular](https://angular.io/)
+* [Ngxs](https://www.ngxs.io/)
+* [Angular material](https://material.angular.io/)
+* [Mongo Atlas](https://www.mongodb.com/cloud/atlas/lp/try-atlas)
 
-## Running unit tests
+<!-- GETTING STARTED -->
+## Getting Started
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+This project contains both frontend and backend development using nodejs with express for REST api services and Angular v15 for frontend side. Therefore, it is necessary to run the project with the following commands inside root project directory
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+  ```sh
+  npm run mock:server
+  ng serve
+  ```
+Login credentials:
+* email: luis@mail.com
+* pass: 1234
 
-## Further help
+When the application is executed, it will connect to Mongo atlas with access to a remote database
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+<h1>Thank you!</h1>

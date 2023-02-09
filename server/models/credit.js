@@ -11,7 +11,8 @@ const creditSchema = Schema({
   },
   status: {
     type: String,
-    required: true
+    required: true,
+    default: 'active'
   }
 })
 

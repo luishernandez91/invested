@@ -1,14 +1,17 @@
 // Core modules
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 // App modules
 import {AppRoutingModule} from './app-routing.module';
 import {MaterialModule} from "@shared/modules/material/material.module";
 import {ComponentsModule} from "@shared/components/components.module";
+import {StateModule} from "@state/state.module";
 // Components
 import {AppComponent} from './app.component';
+// Services
+import {BearerService} from "./interceptors/bearer.service";
 
 @NgModule({
   declarations: [
@@ -20,9 +23,16 @@ import {AppComponent} from './app.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ComponentsModule
+    ComponentsModule,
+    StateModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: BearerService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
