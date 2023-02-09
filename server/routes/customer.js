@@ -1,5 +1,4 @@
 const {Router} = require('express');
-const db = require("../data");
 const {getCustomers, postCustomer, putCustomer, deleteCustomer} = require("../controllers/customer");
 const {validateToken} = require("../helpers/jwt");
 

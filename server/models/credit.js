@@ -1,9 +1,9 @@
 const {Schema, model} = require('mongoose');
 
 const creditSchema = Schema({
-  user_id: {
-    type: Number,
-    required: true
+  customer_id: {
+    type: Schema.Types.ObjectId,
+    ref: 'Customer'
   },
   amount: {
     type: Number,
