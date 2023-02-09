@@ -1,14 +1,12 @@
 <mat-toolbar>
-  <span>Dashboard</span>
+  <img src="/assets/img/logoinvestedhd.svg" alt="invested logo" width="150">
   <header>
-    <button mat-button class="-active" aria-label="Example icon-button with heart icon">
-      Customers
+    <ng-container *ngFor="let link of navigationLinks">
+    <button mat-button
+            [routerLinkActiveOptions]="{exact: true}"
+            routerLinkActive="-active" [routerLink]="link?.path">
+      {{link?.label}}
     </button>
-    <button mat-button>
-      Credits
-    </button>
-    <button mat-button>
-      Payments
-    </button>
+    </ng-container>
   </header>
 </mat-toolbar>
