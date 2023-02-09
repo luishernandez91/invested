@@ -12,6 +12,7 @@ dbConnection();
 // Routes
 app.use('/users', require('./routes/user'));
 app.use('/customers', require('./routes/customer'));
+app.use('/credits', require('./routes/credit'));
 app.use('/payments', require('./routes/payment'));
 app.use('/login', require('./routes/auth'));
 

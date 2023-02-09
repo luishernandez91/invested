@@ -32,7 +32,6 @@ export class CustomersState {
   @Action(GetCustomers)
   list({getState, setState}: StateContext<CustomersStateModel>) {
     const state = getState();
-    console.log(state);
     if (state.customers.length > 0) {
       return state;
     }

@@ -1,7 +1,7 @@
 const {response} = require('express');
 const Credit = require('../models/credit');
 const getCredits = async (req, res) => {
-  const customers = await Credit.find({});
+  const customers = await Credit.find({}).populate('customer_id');
   res.json(customers);
 };
 const getCreditsByCustomer = async (req, res) => {

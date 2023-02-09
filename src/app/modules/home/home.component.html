@@ -3,33 +3,19 @@
 </div>
 <br>
 <div class="customers-table">
-  <table mat-table [dataSource]="customers$" class="mat-elevation-z8">
-
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.uid}} </td>
+  <ng-container *ngIf="customers$ | async as customers">
+    <ng-container *ngIf="customers.length > 0 else noRecords">
+      <app-table [columns]="customerTableColumns"
+                 [items]="customers"
+                 (onClickedRow)="openDialog($event)">
+      </app-table>
     </ng-container>
-
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="lastname">
-      <th mat-header-cell *matHeaderCellDef> Lastname </th>
-      <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> Email </th>
-      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row
-        (click)="openDialog(row)"
-        *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+  </ng-container>
 </div>
 
+<ng-template #noRecords>
+  <mat-card>
+    <mat-card-content>No records found</mat-card-content>
+  </mat-card>
+</ng-template>
 

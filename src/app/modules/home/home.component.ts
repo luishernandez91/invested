@@ -6,6 +6,7 @@ import {CustomersState} from "@state/customer/customers.state";
 import {AddCustomer, GetCustomers, UpdateCustomer} from "@state/customer/customers.actions";
 import {MatDialog} from "@angular/material/dialog";
 import {CustomerFormComponent} from "@modules/dashboard/customer-form/customer-form.component";
+import {TableColumnsInterface} from "@shared/components/table/table.component";
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,38 @@ import {CustomerFormComponent} from "@modules/dashboard/customer-form/customer-f
 })
 export class HomeComponent implements OnInit{
   @Select(CustomersState.customers) customers$!: Observable<CustomerInterface[]>;
-  displayedColumns: string[] = ['id', 'name', 'lastname', 'email'];
+  displayedColumns: string[] = ['id', 'name', 'lastname','phone', 'email'];
+
+  customerTableColumns: TableColumnsInterface = {
+    displayedColumns: this.displayedColumns,
+    columnsConfig: [
+      {
+        id: 'id',
+        property: 'uid',
+        label: '#'
+      },
+      {
+        id: 'name',
+        property: 'name',
+        label: 'Name'
+      },
+      {
+        id: 'lastname',
+        property: 'lastname',
+        label: 'LastName'
+      },
+      {
+        id: 'phone',
+        property: 'phone',
+        label: 'Phone'
+      },
+      {
+        id: 'email',
+        property: 'email',
+        label: 'Email'
+      }
+    ]
+  }
   constructor(private store: Store, public dialog: MatDialog) {
   }
 

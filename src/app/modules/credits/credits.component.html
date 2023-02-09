@@ -1,1 +1,15 @@
-<p>credits works!</p>
+<div class="customers-table">
+  <ng-container *ngIf="credits$ | async as credits">
+    <ng-container *ngIf="credits.length > 0 else noRecords">
+      <app-table [columns]="creditTableColumns"
+                 [items]="credits">
+      </app-table>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #noRecords>
+  <mat-card>
+    <mat-card-content>No records found</mat-card-content>
+  </mat-card>
+</ng-template>
