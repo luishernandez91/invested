@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>Credit payments</h1>
+<div mat-dialog-content>
+
+  <div class="payments-table">
+    <ng-container *ngIf="payments$ | async as payments; else loading">
+      <ng-container *ngIf="payments.length > 0 else noRecords">
+        <app-table [columns]="paymentsTableColumns"
+                   [items]="payments">
+        </app-table>
+      </ng-container>
+    </ng-container>
+    <ng-template #loading>
+      <div class="loader">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
+    <ng-template #noRecords>
+      <mat-card>
+        <mat-card-content>No payments found</mat-card-content>
+      </mat-card>
+    </ng-template>
+  </div>
+
+  <form class="payment-form" [formGroup]="paymentForm">
+    <ng-container *ngIf="addPayment">
+
+      <mat-form-field appearance="fill" floatLabel="always">
+        <mat-label>Amount</mat-label>
+        <input matInput type="number"
+               class="example-right-align"
+               placeholder="0"
+               formControlName="amount">
+        <span matTextPrefix>$&nbsp;</span>
+        <span matTextSuffix>.00</span>
+        <mat-hint align="end">Min $1000</mat-hint>
+      </mat-form-field>
+
+    </ng-container>
+  </form>
+</div>
+<div mat-dialog-actions class="modal-actions">
+  <div class="payment-actions">
+    <ng-container *ngIf="addPayment else close">
+      <button mat-button color="warn" (click)="addPayment = false">Cancel</button>
+      <button mat-button color="primary" [disabled]="paymentForm.invalid" (click)="onSave()">Save</button>
+    </ng-container>
+    <ng-template #close>
+      <button mat-button mat-dialog-close color="warn">Close</button>
+    </ng-template>
+  </div>
+  <ng-container *ngIf="!addPayment">
+    <button mat-button color="accent" (click)="addPayment = true">Add payment</button>
+  </ng-container>
+</div>

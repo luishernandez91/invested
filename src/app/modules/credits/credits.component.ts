@@ -8,7 +8,10 @@ import {TableColumnsInterface} from "@shared/components/table/table.component";
 import {ActivatedRoute} from "@angular/router";
 import {CustomerInterface} from "@shared/interfaces/customer.interface";
 import {CustomersState} from "@state/customer/customers.state";
-import {GetCustomers} from "@state/customer/customers.actions";
+import {AddCustomer, GetCustomers, UpdateCustomer} from "@state/customer/customers.actions";
+import {CustomerFormComponent} from "@modules/dashboard/customer-form/customer-form.component";
+import {MatDialog} from "@angular/material/dialog";
+import {PaymentsComponent} from "@modules/credits/payments/payments.component";
 
 @Component({
   selector: 'app-credits',
@@ -48,7 +51,9 @@ export class CreditsComponent implements OnInit {
     ]
   }
 
-  constructor(private store: Store, private readonly route: ActivatedRoute) {
+  constructor(private store: Store,
+              private readonly route: ActivatedRoute,
+              public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -58,7 +63,7 @@ export class CreditsComponent implements OnInit {
   getCredits() {
     this.route.paramMap
       .subscribe((params) => {
-        const customer = params.get('customer');
+          const customer = params.get('customer');
           if (customer) {
             this.store.dispatch(new GetCustomers());
             this.store.dispatch(new GetCustomerCredits(customer));
@@ -79,5 +84,16 @@ export class CreditsComponent implements OnInit {
           this.creditTableColumns.displayedColumns = [...this.displayedColumns.filter(column => column !== 'customer')]
         }
       });
+  }
+
+  showPayments({_id: credit_id, customer_id}: CreditInterface) {
+    const dialogRef = this.dialog.open(PaymentsComponent, {
+      data: {credit_id, customer_id},
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
 }

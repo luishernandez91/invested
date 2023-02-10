@@ -6,12 +6,14 @@ import {ComponentsModule} from "@shared/components/components.module";
 import {MaterialModule} from "@shared/modules/material/material.module";
 import { CreditsFormComponent } from './credits-form/credits-form.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { PaymentsComponent } from './payments/payments.component';
 
 
 @NgModule({
   declarations: [
     CreditsComponent,
-    CreditsFormComponent
+    CreditsFormComponent,
+    PaymentsComponent
   ],
   imports: [
     CommonModule,

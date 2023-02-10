@@ -48,7 +48,7 @@ const postPayment = async (req, res) => {
   try {
     const payment = new Payment(req.body);
     await payment.save();
-    res.json({created: true, payment});
+    res.json(payment);
   } catch (e) {
     res.status(500).json({
       success: false,

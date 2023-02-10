@@ -29,7 +29,8 @@
   <ng-container *ngIf="credits$ | async as credits">
     <ng-container *ngIf="credits.length > 0 else noRecords">
       <app-table [columns]="creditTableColumns"
-                 [items]="credits">
+                 [items]="credits"
+                 (onClickedRow)="showPayments($event)">
       </app-table>
     </ng-container>
   </ng-container>
