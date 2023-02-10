@@ -21,4 +21,16 @@ export class CreditsService {
       })
     );
   }
+
+  getCustomerCredits(customerId: string|null): Observable<CreditInterface[]> {
+    return this.http.get<CreditInterface[]>(`credits/${customerId}`);
+  }
+
+  postCredit(payload: CreditInterface): Observable<CreditInterface> {
+    return this.http.post<{ created: boolean, credit: CreditInterface }>('credits', payload).pipe(
+      map((response) => {
+        return response.credit;
+      })
+    );
+  }
 }

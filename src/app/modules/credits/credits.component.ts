@@ -3,8 +3,7 @@ import {Select, Store} from "@ngxs/store";
 import {map, Observable} from "rxjs";
 import {CreditsState} from "@state/credits/credits.state";
 import {CreditInterface} from "@shared/interfaces/credit.interface";
-import {MatDialog} from "@angular/material/dialog";
-import {GetCredits} from "@state/credits/credits.actions";
+import {GetCredits, GetCustomerCredits} from "@state/credits/credits.actions";
 import {TableColumnsInterface} from "@shared/components/table/table.component";
 import {ActivatedRoute} from "@angular/router";
 import {CustomerInterface} from "@shared/interfaces/customer.interface";
@@ -21,6 +20,7 @@ export class CreditsComponent implements OnInit {
 
   customer!: CustomerInterface | undefined;
   displayedColumns: string[] = ['id', 'amount', 'status', 'customer'];
+  creatingCredit!: boolean;
 
   creditTableColumns: TableColumnsInterface = {
     displayedColumns: this.displayedColumns,
@@ -48,31 +48,36 @@ export class CreditsComponent implements OnInit {
     ]
   }
 
-  constructor(private store: Store, public dialog: MatDialog, private readonly route: ActivatedRoute) {
+  constructor(private store: Store, private readonly route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new GetCredits());
-    /*this.route.queryParams
-      .subscribe(params => {
-        console.log(params);
-        }
-      );*/
-    this.store.dispatch(new GetCustomers());
-    this.setCustomerData()
+    this.getCredits();
   }
 
-  setCustomerData() {
-    const customerId = this.route.snapshot.paramMap.get('customer');
-    if (customerId) {
-      this.store.select(CustomersState.customer).pipe(map(
-        filterFn => filterFn(customerId)))
-        .subscribe((customer) => {
-          this.customer = customer;
+  getCredits() {
+    this.route.paramMap
+      .subscribe((params) => {
+        const customer = params.get('customer');
           if (customer) {
-            this.creditTableColumns.displayedColumns = [...this.displayedColumns.filter(column => column !== 'customer')]
+            this.store.dispatch(new GetCustomers());
+            this.store.dispatch(new GetCustomerCredits(customer));
+            this.setCustomerData(customer)
+          } else {
+            this.store.dispatch(new GetCredits());
           }
-        });
-    }
+        }
+      );
+  }
+
+  setCustomerData(customerId: string) {
+    this.store.select(CustomersState.customer).pipe(map(
+      filterFn => filterFn(customerId)))
+      .subscribe((customer) => {
+        this.customer = customer;
+        if (customer) {
+          this.creditTableColumns.displayedColumns = [...this.displayedColumns.filter(column => column !== 'customer')]
+        }
+      });
   }
 }

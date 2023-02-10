@@ -1,4 +1,31 @@
-<div class="customers-table">
+
+<ng-container *ngIf="customer">
+  <div class="customer-info">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{customer.name}} {{customer.lastname}}</mat-card-title>
+        <mat-card-subtitle>Customer contact details</mat-card-subtitle>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <p><span>Email: </span>{{customer.email}}</p>
+        <p><span>Phone: </span>{{customer.phone}}</p>
+        <mat-divider></mat-divider>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary"
+                [disabled]="creatingCredit"
+                (click)="creatingCredit = !creatingCredit">Add credit</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <ng-container *ngIf="creatingCredit">
+    <app-credits-form [customerId]="customer.uid" (onCancel)="creatingCredit = false"></app-credits-form>
+  </ng-container>
+</ng-container>
+
+<div class="credits-table">
   <ng-container *ngIf="credits$ | async as credits">
     <ng-container *ngIf="credits.length > 0 else noRecords">
       <app-table [columns]="creditTableColumns"

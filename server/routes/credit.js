@@ -5,7 +5,7 @@ const {validateToken} = require("../helpers/jwt");
 const router = Router();
 
 router.get('/', getCredits);
-router.get('/:customer_id', validateToken, getCreditsByCustomer);
+router.get('/:customer_id', getCreditsByCustomer);
 router.post('/', postCredit);
 router.put('/:id', putCredit);
 router.delete('/:id', deleteCredit);
