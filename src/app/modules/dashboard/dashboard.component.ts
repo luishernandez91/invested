@@ -15,10 +15,6 @@ export class DashboardComponent {
     {
       path: '/credits',
       label: 'Credits'
-    },
-    {
-      path: '/payments',
-      label: 'Payments'
     }
   ];
 }

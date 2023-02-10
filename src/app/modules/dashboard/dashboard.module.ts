@@ -22,9 +22,9 @@ const routes: Routes = [
         loadChildren: () => import('@modules/credits/credits.module').then(m => m.CreditsModule),
       },
       {
-        path: 'payments',
-        loadChildren: () => import('@modules/payments/payments.module').then(m => m.PaymentsModule),
-      },
+        path: 'credits/customer/:customer',
+        loadChildren: () => import('@modules/credits/credits.module').then(m => m.CreditsModule),
+      }
     ]
   }
 ]

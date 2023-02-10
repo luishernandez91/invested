@@ -13,7 +13,6 @@ export class BearerService implements HttpInterceptor {
   constructor(private store: Store) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log(req.url);
     if (!req.url.startsWith('http')) {
       req = req.clone({
         url: `${environment.apiUrl}/${req.url}`

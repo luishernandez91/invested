@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CustomerInterface} from "@shared/interfaces/customer.interface";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-customer-form',
@@ -17,6 +18,7 @@ export class CustomerFormComponent implements OnInit{
   constructor(
     public dialogRef: MatDialogRef<CustomerFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private readonly router: Router
   ) {
     console.log(data);
     this.customerForm = new FormGroup({
@@ -46,5 +48,10 @@ export class CustomerFormComponent implements OnInit{
       this.customerForm.patchValue(this.customer);
       this.customerForm.get('amount')?.disable();
     }
+  }
+
+  seeCustomerCredits() {
+    this.router.navigate([`/credits/customer/${this.customer.uid}`])
+      .then(_ => this.dialogRef.close());
   }
 }

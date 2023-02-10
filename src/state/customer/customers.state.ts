@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {State, Action, StateContext, Selector} from '@ngxs/store';
-import { GetCustomers, AddCustomer, UpdateCustomer, DeleteCustomer } from './customers.actions';
+import {GetCustomers, AddCustomer, UpdateCustomer, DeleteCustomer, GetCustomerById} from './customers.actions';
 import {CustomerInterface} from "@shared/interfaces/customer.interface";
 import {CustomerService} from "@services/customer/customer.service";
 import {tap} from "rxjs";
@@ -29,6 +29,16 @@ export class CustomersState {
   static customers(state: CustomersStateModel): CustomerInterface[] | null {
     return state.customers;
   }
+
+  @Selector()
+  static customer(state: CustomersStateModel) {
+    console.log(state);
+    return (uid: string) => {
+      console.log(uid)
+      return state.customers.find(customer => customer.uid === uid);
+    };
+  }
+
   @Action(GetCustomers)
   list({getState, setState}: StateContext<CustomersStateModel>) {
     const state = getState();

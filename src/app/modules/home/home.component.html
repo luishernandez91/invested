@@ -3,7 +3,7 @@
 </div>
 <br>
 <div class="customers-table">
-  <ng-container *ngIf="customers$ | async as customers">
+  <ng-container *ngIf="customers$ | async as customers; else loading">
     <ng-container *ngIf="customers.length > 0 else noRecords">
       <app-table [columns]="customerTableColumns"
                  [items]="customers"
@@ -11,6 +11,12 @@
       </app-table>
     </ng-container>
   </ng-container>
+  <ng-template #loading>
+    <div class="loader">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+
 </div>
 
 <ng-template #noRecords>
@@ -18,4 +24,5 @@
     <mat-card-content>No records found</mat-card-content>
   </mat-card>
 </ng-template>
+
 
