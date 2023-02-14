@@ -12,6 +12,7 @@ import {StateModule} from "@state/state.module";
 import {AppComponent} from './app.component';
 // Services
 import {BearerService} from "./interceptors/bearer.service";
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {BearerService} from "./interceptors/bearer.service";
       provide: HTTP_INTERCEPTORS,
       useClass: BearerService,
       multi: true
-    }
+    },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

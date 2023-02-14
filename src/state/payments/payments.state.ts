@@ -3,6 +3,7 @@ import {State, Action, StateContext, Selector} from '@ngxs/store';
 import {AddPayment, GetPaymentsByCredit} from './payments.actions';
 import {tap} from "rxjs";
 import {PaymentService} from "@services/payment/payment.service";
+import {DatePipe} from "@angular/common";
 
 export class PaymentsStateModel {
   public payments!: any[];
@@ -17,7 +18,7 @@ export class PaymentsStateModel {
 @Injectable()
 export class PaymentsState {
 
-  constructor(private readonly paymentService: PaymentService) {
+  constructor(private readonly paymentService: PaymentService, private datePipe: DatePipe) {
   }
 
   /**

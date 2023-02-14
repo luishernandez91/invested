@@ -86,10 +86,10 @@ export class CreditsComponent implements OnInit {
       });
   }
 
-  showPayments({_id: credit_id, customer_id}: CreditInterface) {
+  showPayments({_id: credit_id, customer_id, amount}: CreditInterface) {
     const dialogRef = this.dialog.open(PaymentsComponent, {
-      data: {credit_id, customer_id},
-      width: '400px'
+      data: {credit_id, customer_id: customer_id?.uid, amount},
+      width: '450px'
     });
 
     dialogRef.afterClosed().subscribe(result => {

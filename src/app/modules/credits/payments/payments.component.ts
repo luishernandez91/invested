@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Select, Store} from "@ngxs/store";
 import {PaymentsState} from "@state/payments/payments.state";
 import {Observable} from "rxjs";
@@ -17,6 +17,7 @@ export class PaymentsComponent {
 
   paymentForm: FormGroup;
   addPayment: boolean = false;
+  paid: number = 0;
 
   displayedColumns: string[] = ['id', 'amount', 'date'];
 
@@ -42,23 +43,35 @@ export class PaymentsComponent {
   };
 
   constructor(public dialogRef: MatDialogRef<PaymentsComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: { customer_id: string, credit_id: string },
+              @Inject(MAT_DIALOG_DATA) public data: { customer_id: string, credit_id: string, amount: number },
               private store: Store) {
     this.paymentForm = new FormGroup({
       credit_id: new FormControl(data.credit_id, Validators.required),
       customer_id: new FormControl(data.customer_id, Validators.required),
-      amount: new FormControl(0, [Validators.required, Validators.min(1)]),
+      amount: new FormControl(0, [
+        Validators.required,
+        Validators.min(1),
+        (control: AbstractControl) => Validators.max(data.amount - this.paid)(control)
+      ]),
     });
     this.getCreditPayments(data.credit_id);
+    this.getTotalDebt();
+  }
+
+  getTotalDebt() {
+    this.payments$.subscribe(payments => {
+      this.paid = payments.reduce((acc: number, value: { amount: number; }) => {
+        return acc + value.amount;
+      }, 0);
+    });
   }
 
   getCreditPayments(creditId: string) {
-    console.log('getCreditPayments', creditId);
     this.store.dispatch(new GetPaymentsByCredit(creditId));
   }
 
   onSave() {
-    this.store.dispatch(new AddPayment(this.paymentForm.value)).subscribe(()=>{
+    this.store.dispatch(new AddPayment(this.paymentForm.value)).subscribe(() => {
       this.addPayment = false;
       this.paymentForm.reset();
     });

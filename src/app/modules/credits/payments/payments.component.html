@@ -1,6 +1,11 @@
 <h1 mat-dialog-title>Credit payments</h1>
 <div mat-dialog-content>
 
+  <div class="credit-details">
+    <p><span>Total: </span> {{data.amount | currency}}</p>
+    <p><span>Paid: {{paid | currency}}</span></p>
+  </div>
+
   <div class="payments-table">
     <ng-container *ngIf="payments$ | async as payments; else loading">
       <ng-container *ngIf="payments.length > 0 else noRecords">
@@ -27,12 +32,12 @@
       <mat-form-field appearance="fill" floatLabel="always">
         <mat-label>Amount</mat-label>
         <input matInput type="number"
-               class="example-right-align"
                placeholder="0"
                formControlName="amount">
         <span matTextPrefix>$&nbsp;</span>
         <span matTextSuffix>.00</span>
         <mat-hint align="end">Min $1000</mat-hint>
+        <mat-error *ngIf="paymentForm.get('amount')?.hasError('max')">Amount can't be greater than total debt</mat-error>
       </mat-form-field>
 
     </ng-container>

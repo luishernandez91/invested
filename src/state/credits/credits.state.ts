@@ -37,7 +37,7 @@ export class CreditsState {
     return this.creditService.getCredits().pipe(
       tap((credits: CreditInterface[]) => {
         const state = getState();
-        setState({...state, credits: [...getState().credits, ...credits]});
+        setState({...state, credits: [...credits]});
       })
     );
   }
