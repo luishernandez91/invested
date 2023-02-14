@@ -3,7 +3,7 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/com
 import {Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
 import {environment} from "@env/environment";
-// import {AuthState} from '@shared/states/auth/auth.state';
+import {AuthState} from "@state/auth/auth.state";
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +18,13 @@ export class BearerService implements HttpInterceptor {
         url: `${environment.apiUrl}/${req.url}`
       })
     }
-    /*const token = this.store.selectSnapshot(AuthState.token);
+
+    const token = this.store.selectSnapshot(AuthState.token);
     req = req.clone({
       setHeaders: {
-        Authorization: `Bearer ${token}`
+        Authorization: `${token}`
       }
-    });*/
+    });
 
     return next.handle(req);
   }

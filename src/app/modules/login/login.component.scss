@@ -1,0 +1,22 @@
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  flex-flow: column;
+
+  .login-form {
+    border: solid 1px #e5e5e5;
+    border-radius: 15px;
+    padding: 2rem;
+    display: flex;
+    flex-flow: column;
+    width: 350px;
+    justify-content: center;
+    align-items: center;
+
+    .form-control {
+      width: 100%;
+    }
+  }
+}

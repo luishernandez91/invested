@@ -17,7 +17,7 @@ const getToken = (id) => {
 
 }
 const validateToken = (req, res, next) => {
-  const token = req.header('token');
+  const token = req.header('Authorization');
 
   if (!token) {
     return res.status(401).json({
@@ -31,6 +31,9 @@ const validateToken = (req, res, next) => {
     next();
   } catch (e) {
     console.log(e);
+    return res.status(403).json({
+      message: 'Authentication error'
+    });
   }
 }
 

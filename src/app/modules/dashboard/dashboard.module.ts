@@ -6,12 +6,14 @@ import {ComponentsModule} from "@shared/components/components.module";
 import {CustomerFormComponent} from './customer-form/customer-form.component';
 import {MaterialModule} from "@shared/modules/material/material.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import {AuthGuard} from "@guards/auth/auth.guard";
 
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',

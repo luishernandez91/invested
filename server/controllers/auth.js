@@ -1,10 +1,15 @@
 const {response} = require('express');
 const User = require('../models/user');
 const {getToken} = require("../helpers/jwt");
+const md5 = require('md5');
+
 const login = async (req, res = response) => {
   try {
     const {email, password} = req.body;
-    const user = await User.findOne({email, password});
+
+    const hashedPassword = md5(password);
+
+    const user = await User.findOne({email, password: hashedPassword});
 
     if (!user) {
       return res.status(404).json({
